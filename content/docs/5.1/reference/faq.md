@@ -27,7 +27,7 @@ TiKV is at your service if your applications require the following features:
 
 You can scale out TiKV as your business grows. To increase the capacity of TiKV, you only need to add more machines. TiKV can run across physical, virtual, container, and cloud environments.
 
-Placement Driver ([PD](https://github.com/pingcap/pd)) periodically checks replication constraints and balances the load, and automatically handles data movement. Therefore, when PD notices that the load is too high, it rebalances data.
+Placement Driver ([PD](https://github.com/pingcap/pd)) periodically checks replication constraints, balances the load, and automatically handles data movement. Therefore, when PD notices that the load is too high, it rebalances data.
 
 ## How is TiKV highly available?
 
@@ -35,7 +35,7 @@ TiKV is self-recoverable. Its guaranteed strong consistency ensures automatic da
 
 ## How is TiKV strongly consistent?
 
-Strong consistency indicates that all replicas return the same value to a request of object attribute. TiKV uses the [Raft consensus algorithm](https://raft.github.io/) to ensure its consistency among multiple replicas. TiKV allows a collection of machines to work as a coherent group so that TiKV can normally work even though some parts of machines fail during the working process.
+Strong consistency indicates that all replicas return the same value to a request of object attribute. TiKV uses the [Raft consensus algorithm](https://raft.github.io/) to ensure its consistency among multiple replicas. TiKV allows a collection of machines to work as a coherent group so that TiKV can correctly work even though some parts of machines fail during the working process.
 
 ## Does TiKV support distributed transactions?
 
@@ -52,7 +52,7 @@ Yes. ACID semantics are guaranteed in TiKV:
 
 ## How are transactions in TiKV lock-free?
 
-TiKV provides an optimistic transaction model, which allows the client to buffer all writes in a transaction. When the client calls the commit function, the writes are packed and sent to the server. If there are no conflicts, the key-value pair writes with specific version information are written to the database and can be read by other transactions.
+TiKV provides an optimistic transaction model, which allows the client to buffer all writes in a transaction. When the client calls the commit function, the writes are packed and sent to the server. If there are no conflicts, the key-value pairs with additional specific version information are written to the database, thereby they can be read by other transactions.
 
 ## Can I use TiKV as a key-value store?
 

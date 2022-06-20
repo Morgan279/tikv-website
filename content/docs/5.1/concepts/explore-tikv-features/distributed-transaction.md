@@ -23,7 +23,7 @@ Transaction isolation is one of the foundations of database transaction processi
 
 TiKV implements [Snapshot Isolation (SI)](https://en.wikipedia.org/wiki/Snapshot_isolation) consistency, which means that:
 
-- all reads made in a transaction will see a consistent snapshot of the database (in practice TiKV Client reads the last committed values that exist when TiKV Client starts);
+- all reads made in a transaction will see a consistent snapshot of the database (in practice, TiKV Client reads the last committed values that exist since TiKV Client has started);
 - the transaction will successfully commit only if the updates that a transaction has made do not conflict with the concurrent updates made by other transactions since that snapshot.
 
 The following example shows how to test TiKV's snapshot isolation.
@@ -66,7 +66,7 @@ snapshot2 = client.snapshot(client.current_timestamp())
 print(snapshot2.batch_get([b"k1", b"k2"]))
 ```
 
-Run test script
+Run the test script
 
 ```bash
 python3 test_snapshot_isolation.py

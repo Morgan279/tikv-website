@@ -29,7 +29,7 @@ Now consider about the following situations:
 * Not all Regions are hot, so loads of all TiKV stores need to be balanced;
 * When Regions are in balancing, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
 
-These situations can occur at the same time, which makes it harder to resolve. Also, the whole system is changing dynamically, so a scheduler is needed to collect all information about the cluster, and then adjust the cluster. So, PD is introduced into the TiKV cluster.
+These situations can occur at the same time, which makes it harder to resolve. Also, the whole system is changing dynamically, so it is essential to collect all information about the cluster to adjust it appropriately by a scheduler. Thus, PD is introduced into the TiKV cluster.
 
 ## Scheduling requirements
 
@@ -51,7 +51,7 @@ The above situations can be classified into two types:
 
 After the first type of requirements is satisfied, the system will be failure tolerable. After the second type of requirements is satisfied, resources will be utilized more efficiently and the system will have better scalability.
 
-To achieve the goals, PD needs to collect information firstly, such as state of peers, information about Raft groups and the statistics of accessing the peers. Then we need to specify some strategies for PD, so that PD can make scheduling plans from these information and strategies. Finally, PD distributes some operators to TiKV peers to complete scheduling plans.
+To achieve the goals, PD needs to collect information firstly, such as state of peers, information about Raft groups and the statistics of accessing the peers. Then we need to specify some strategies for PD, so that PD can make scheduling plans from these information and strategies. Finally, PD distributes some operators to TiKV peers to conduct scheduling plans.
 
 ## Basic scheduling operators
 
@@ -90,7 +90,7 @@ Scheduling is based on information collection. In short, the PD scheduling compo
 
 PD collects cluster information by the two types of heartbeats and then makes decision based on it.
 
-Besides, PD can get more information from an expanded interface to make a more precise decision. For example, if a store's heartbeats are broken, PD can't know whether the peer steps down temporarily or forever. It just waits a while (by default 30min) and then treats the store as offline if there are still no heartbeats received. Then PD balances all regions on the store to other stores.
+Besides, PD can get more information from an expanded interface to make a more precise decision. For example, if a store's heartbeats are broken, PD can't know whether the peer steps down temporarily or forever. It just waits for a while (by default 30min) and then treats the store as offline if there is still no heartbeat received. After that, PD balances all regions on the store to other stores.
 
 But sometimes stores are manually set offline by a maintainer, so the maintainer can tell PD this by the PD control interface. Then PD can balance all regions immediately.
 
@@ -108,13 +108,13 @@ PD can know that the replica count of a Region is incorrect from the Region lead
 
 **Strategy 2: Replicas of a Region need to be at different positions**
 
-Note that here "position" is different from "machine". Generally PD can only ensure that replicas of a Region are not at a same peer to avoid that the peer's failure causes more than one replicas to become lost. However in production, you might have the following requirements:
+Note that the "position" here is different from "machine". In general, PD can only ensure that replicas of a Region are not at a same peer, thereby avoiding that the peer's failure causes more than one replicas to become lost. However in production, you might have the following requirements:
 
 * Multiple TiKV peers are on one machine;
 * TiKV peers are on multiple racks, and the system is expected to be available even if a rack fails;
 * TiKV peers are in multiple data centers, and the system is expected to be available even if a data center fails;
 
-The key to these requirements is that peers can have the same "position", which is the smallest unit for failure toleration. Replicas of a Region must not be in one unit. So, we can configure [labels](https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140) for the TiKV peers, and set [location-labels](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100) on PD to specify which labels are used for marking positions.
+The essence to these requirements is that peers can have the same "position", which is the smallest unit for failure toleration. Replicas of a Region must not be in one unit. So, we can configure [labels](https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140) for the TiKV peers, and set [location-labels](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100) on PD to specify which labels are used for marking positions.
 
 **Strategy 3: Replicas need to be balanced between stores**
 
@@ -140,4 +140,4 @@ Scheduling utilizes CPU, memory, network and I/O traffic. Too much resource util
 
 PD collects cluster information from store heartbeats and Region heartbeats, and then makes scheduling plans from the information and strategies. Scheduling plans are a sequence of basic operators. Every time PD receives a Region heartbeat from a Region leader, it checks whether there is a pending operator on the Region or not. If PD needs to dispatch a new operator to a Region, it puts the operator into heartbeat responses, and monitors the operator by checking follow-up Region heartbeats.
 
-Note that here "operators" are only suggestions to the Region leader, which can be skipped by Regions. Leader of Regions can decide whether to skip a scheduling operator or not based on its current status.
+Note that the "operators" here are only suggestions to the Region leader, which can be skipped by Regions. In other words, the Regions Leader can decide whether to skip a scheduling operator or not based on its current status.

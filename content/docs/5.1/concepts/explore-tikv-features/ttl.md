@@ -10,7 +10,7 @@ menu:
 This page walks you through a simple demonstration of how to use TTL (Time To Live) on RawKV. TTL is a data clearing mechanism that automatically deletes data after a specified period of time. For example:
 
 - If TTL is not used, the data written to TiKV will always exist in TiKV unless it is manually deleted.
-- If TTL is used and the TTL time of a key is set to one hour, the data of the key will be automatically deleted by TiKV after one hour.
+- If TTL is used, and the TTL time of a key is set to one hour, the data of the key will be automatically deleted by TiKV after one hour.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ Before you start, ensure that you have installed TiUP and jshell, and have downl
 
 ## Step 1: Config TiKV to enable TTL
 
-TTL is disabled by default. You need to create a file `tikv.yaml` using the following configuration to enable TTL.
+TTL is disabled by default. You need to create a file `tikv.yaml` using the following configuration to enable it.
 
 ```yaml
 [storage]
@@ -104,4 +104,4 @@ value: "v2"
 ]
 ```
 
-After running the above code, you can find that `k1` is automatically deleted when its TTL is expired.
+After running the above code, you can find that `k1` is automatically deleted when its TTL has expired.

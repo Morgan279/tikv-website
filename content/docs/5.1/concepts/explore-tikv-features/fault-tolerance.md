@@ -23,8 +23,8 @@ The process is as follows:
 
 Before the process of failure simulation begins, the following requirements are already met:
 
-+ [TiUP](https://github.com/pingcap/tiup) is installed (v1.5.2 or later) as described in [TiKV in 5 Minutes](../../tikv-in-5-minutes).
-+ [client-py](https://github.com/tikv/client-py) is installed. It is used to interact with the TiKV cluster.
++ [TiUP](https://github.com/pingcap/tiup) has been installed (v1.5.2 or later) as described in [TiKV in 5 Minutes](../../tikv-in-5-minutes).
++ [client-py](https://github.com/tikv/client-py) has been installed. It is used to interact with the TiKV cluster.
 
 ### Step 1. Start a six-node cluster
 
@@ -94,7 +94,7 @@ Use the client-py tool to verify the data imported in the last step. Note that t
 10000
 ```
 
-The evaluation of the last expression should be **10000**, as the `recordcount` has specified in the `go-ycsb` command.
+The evaluation of the last expression should be **10000**, as the `recordcount` has been specified in the `go-ycsb` command.
 
 ## Run a workload against TiKV
 
@@ -120,14 +120,14 @@ UPDATE - Takes(s): 20.0, Count: 15799, OPS: 791.1, Avg(us): 19834, Min(us): 1050
 ```
 
 {{< info >}}
-This workload above runs for several minutes, which is enough time to simulate a node failure described as follows.
+This workload above runs for several minutes, which is the enough time to simulate a node failure described as follows.
 {{< /info >}}
 
 ### Step 2. Check the workload on Grafana dashboard
 
 1. Open the [Grafana](https://grafana.com) dashboard by accessing [`http://127.0.0.1:3000`](http://127.0.0.1:3000) in your browser.
 
-2. Log into the dashboard using the default username `admin` and password `admin`.
+2. Login the dashboard by using the default username `admin` and password `admin`.
 
 3. Enter the dashboard **playground-tikv-summary**, and the OPS information is in the panel **gRPC message count** in the row **gRPC**.
 

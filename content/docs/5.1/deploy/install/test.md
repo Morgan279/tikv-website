@@ -32,7 +32,7 @@ This chapter describes how to deploy a TiKV cluster using TiUP Playground.
     tiup
     ```
 
-3. If TiUP is already installed, update the TiUP playground component to the latest version:
+3. If TiUP has been already installed, update the TiUP playground component to the latest version:
 
     ```bash
     tiup update --self && tiup update playground
@@ -79,7 +79,7 @@ Other methods are documented for informational purposes.
 
 ### Deploy the TiKV cluster on a single machine
 
-This section describes how to deploy TiKV on a single machine installed with the Linux system. Take the following steps:
+This section describes how to deploy TiKV on a single machine (Linux for example). Take the following steps:
 
 1. Download the official binary package.
 

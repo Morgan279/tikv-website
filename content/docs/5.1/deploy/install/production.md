@@ -41,7 +41,7 @@ Log in to the control machine using a regular user account (take the `tikv` user
     tiup cluster
     ```
 
-4. If TiUP is already installed, update the TiUP cluster component to the latest version:
+4. If TiUP has been already installed, update the TiUP cluster component to the latest version:
 
     ```bash
     tiup update --self && tiup update cluster
@@ -156,7 +156,7 @@ Expected output includes the instance ID, role, host, listening port, and status
 tiup cluster start tikv-test
 ```
 
-If the output log includes ```Started cluster `tikv-test` successfully```, the start is successful.
+If the output log includes ```Started cluster `tikv-test` successfully```, the deployment is successful.
 
 ## Step 7: Verify the running status of the TiKV cluster
 For the specific operations, see [Verify Cluster Status](../verify).

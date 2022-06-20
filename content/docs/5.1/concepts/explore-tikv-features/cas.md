@@ -25,11 +25,11 @@ The atomicity guarantees that the new value is calculated based on the up-to-dat
 
 ## Prerequisites
 
-Make sure that you have installed TiUP, jshell, download tikv-client JAR files, and start a TiKV cluster according to [TiKV in 5 Minutes](../../tikv-in-5-minutes).
+Make sure that you have installed TiUP, jshell, downloaded tikv-client JAR files, and started a TiKV cluster according to [TiKV in 5 Minutes](../../tikv-in-5-minutes).
 
 ## Verify CAS
 
-To verify whether CAS works, take the following steps.
+To verify whether CAS works, you can take the following steps.
 
 ### Step 1: Write the code to test CAS
 
@@ -98,5 +98,5 @@ As in the example output, after calling `compareAndSet`, the value `CAS` is repl
 
 - To ensure the linearizability of `CAS` when it is used together with `put`, `delete`, `batch_put`, or `batch_delete`, you must set `conf.setEnableAtomicForCAS(true)`.
 
-- To guarantee the atomicity of CAS, write operations such as `put` or `delete` in atomic mode take more resources.
+- To guarantee the atomicity of CAS, write operations such as `put` or `delete` in atomic mode will take more resources.
 {{< /warning >}}

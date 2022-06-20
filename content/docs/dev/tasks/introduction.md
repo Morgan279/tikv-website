@@ -40,6 +40,6 @@ Learn how to inspect a TiKV cluster in the [**Monitor**](../monitor/introduction
 
 ## [Scale](../scale/introduction)
 
-As your dataset and workload change you'll eventually need to scale TiKV to meet these new demands. In the [**Scale**](../scale/introduction) section you'll find out how to grow and shrink your TiKV cluster.
+As your dataset and workload keeps changing, you'll eventually need to scale TiKV to meet these new demands. In the [**Scale**](../scale/introduction) section you'll find out how to grow and shrink your TiKV cluster.
 
 If you deployed using Ansible, please check the [**Ansible Scaling**](../scale/ansible) guide.
