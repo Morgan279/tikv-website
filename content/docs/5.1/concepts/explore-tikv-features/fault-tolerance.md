@@ -184,13 +184,13 @@ In the above single-node failure simulation, the TiKV cluster has recovered. The
 Experiment 2 will increase the Region replicas of TiKV to five, stop two non-leader nodes simultaneously, and check the cluster status.
 
 {{< info >}}
-The component version should be explicitly specified in the `tiup ctl` command. In the following example, the component version is v5.1.0.
+The component version should be explicitly specified in the `tiup ctl` command. In the following example, the component version is v6.1.0.
 {{< /info >}}
 
 1. Increase the replicas of the cluster to five:
 
     ```sh
-    tiup ctl:v5.1.0 pd config set max-replicas 5
+    tiup ctl:v6.1.0 pd config set max-replicas 5
     ```
 
 2. Stop two non-leader nodes simultaneously. In this example, the processes that hold the ports `20181` and `20182` are stopped. The process IDs (PIDs) are `1009934` and `109941`.
